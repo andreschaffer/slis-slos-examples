@@ -1,7 +1,7 @@
 # SLIs and SLOs examples
 
 # Motivation
-How reliable is the service you provide to your customers? And what is a _good enough_ reliability level for your service?  
+How reliable is the service you provide to your customers? And what would be a _good enough_ reliability level for your service?  
 
 
 # Definition
