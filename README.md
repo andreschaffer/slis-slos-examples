@@ -16,7 +16,7 @@ SLAs stand for Service Level Agreements. They are simply your SLOs + agreements 
 # Working with it
 Now with the terms covered, it’s time to look at defining SLIs and SLOs for our services.
 
-One advice I’d like to open with is to not care too much about measuring, but measure what you really care about. It's easy to fall for measuring things just because you can. Don't. Be intentional.
+One advice I’d like to open with is to not care too much about measuring, but measure what you really care about. It's easy to fall for measuring things just because we can. Don't. Stay intentional.
 
 ## SLIs
 TODO
