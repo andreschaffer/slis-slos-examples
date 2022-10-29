@@ -14,9 +14,9 @@ SLOs stand for Service Level Objectives. They are simply your SLIs + objectives 
 SLAs stand for Service Level Agreements. They are simply your SLOs + agreements or _consequences_ of breaking the SLOs. These are signed between providers and customers, and the consequences are usually monetary. They directly speak to the third question “What would change in how you work with software development if reliability was a feature?”, as no one wants to lose money. I just wanted to briefly touch on the concept of SLAs since it’s common in the reliability and business world, but won’t go further on it in this project.
 
 # Working with it
-Now with the terms covered, it’s time to define SLIs and SLOs for your services.
+Now with the terms covered, it’s time to look at defining SLIs and SLOs for our services.
 
-One advice I’d like to open with is to not care too much about measuring, but measure what you care about. It's easy to fall for measuring things just because you can. Don't. Be intentional.
+One advice I’d like to open with is to not care too much about measuring, but measure what you really care about. It's easy to fall for measuring things just because you can. Don't. Be intentional.
 
 ## SLIs
 TODO
