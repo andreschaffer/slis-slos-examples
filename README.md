@@ -39,9 +39,10 @@ More definitions worth standardizing on per type of measurement and make your li
 - Where you take the measurements, e.g. at the load balancer. There are a few [alternatives](https://www.coursera.org/lecture/site-reliability-engineering-slos/ways-of-measuring-slis-b1b0B), each with pros and cons.
 - How frequently you take them, e.g. every 10 seconds, and your aggregation interval, e.g. over 1 minute.
 
-
 ## SLOs
-TODO
+The aim with SLOs is to find the reliability line that will divide having happy users and having unhappy users. That is what we call our _good enough_ reliability. It’s easy to agree that setting a too low reliability target will lead to unhappy users. What may not be so obvious is that setting a too high reliability target will lead to, most often, unnecessary effort from your team to maintain it over the course of time. Even if your reliability numbers are super high today, don't lock your SLOs based on that. Many times your users may still be happy with a target less demanding on you. Try to really find your _good enough_ reliability and invest the rest of your time in other types of value to your users.
+
+TODO continue
 
 ## Monitoring & Alerting
 TODO
