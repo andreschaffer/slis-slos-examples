@@ -36,7 +36,7 @@ My second advice is to start pragmatically and from your external users' perspec
 TODO
 
 # Contributing
-TODO
+If you would like to help making this project better, see the [CONTRIBUTING.md](CONTRIBUTING.md).  
 
 # Maintainers
 
