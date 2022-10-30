@@ -43,11 +43,11 @@ More definitions worth standardizing on per type of measurement and make your li
 ## SLOs
 TODO
 
-## Alerting
+## Monitoring & Alerting
 TODO
 
 
-# Running example
+# Running Code Example
 TODO
 
 # Contributing
