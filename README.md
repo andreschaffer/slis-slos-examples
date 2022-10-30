@@ -25,6 +25,9 @@ TODO
 ## Alerting
 TODO
 
+## Where to start in your organization
+TODO
+
 # Running example
 TODO
 
