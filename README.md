@@ -24,9 +24,9 @@ My second advice, as with anything else, is to remain intentional. Do not care t
 ## SLIs
 The types of measurements that speak for the reliability of your service will vary depending on its nature. In most cases though, they will fall into one of the categories from Google's SLI Menu:
 
-TODO image
+![alt text](https://github.com/andreschaffer/slis-slos-examples/blob/main/sli_menu.jpg "SLI Menu image")
 
-I won’t cover all the different SLIs from the Menu, as one can find more detailed information about [them](https://sre.google/workbook/implementing-slos/#slis-for-different-types-of-services) in Google’s SRE book. I will instead focus on the _Request x Response_ category and maintain a red thread in this project.
+I won’t cover all the different SLIs from the Menu, as one can find more detailed information about [them](https://sre.google/workbook/implementing-slos/#slis-for-different-types-of-services) in Google’s SRE book. I will instead focus on the _Request / Response_ category and maintain a red thread in this project.
 
 - Availability: may be seen as the proportion of successful responses.
 - Latency: may be seen as the proportion of responses faster than a threshold.
