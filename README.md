@@ -17,6 +17,8 @@ SLAs stand for Service Level Agreements. They are simply your SLOs + agreements 
 Now with the terms covered, it’s time to look at defining SLIs and SLOs for our services.
 
 ## SLIs
+The types of measurements that can speak for the reliability of your service may vary depending on its nature. In most cases though, they will fall into one of the categories from Google's SLI Menu.
+
 TODO
 
 ## SLOs
