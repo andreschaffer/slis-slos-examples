@@ -25,8 +25,10 @@ TODO
 ## Alerting
 TODO
 
-## Where to start in your organization
-TODO
+## Where to start in your organization?
+My first advice, as with anything else, is to remain intentional. Do not care too much about measuring, but measure what you care about. It's easy to fall for measuring a lot of things just because one can. Understand what really matters to your users, and focus on those.
+
+My second advice is to start pragmatically and from your external users' perspective. Look at the "edge" of your service, where your external users interact directly with, and define your SLIs and SLOs there. As your service's system grows in complexity and dependencies, add SLIs and SLOs to the dependencies too. It will be tricky to maintain SLIs and SLOs at the "edge" and to understand where things went wrong if the dependencies do not take their part in it too.
 
 # Running example
 TODO
