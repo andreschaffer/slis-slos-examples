@@ -22,7 +22,8 @@ My first advice is to start pragmatically and from your external users' perspect
 My second advice, as with anything else, is to remain intentional. Do not care too much about measuring, but measure what you care about. It's easy to fall for measuring a lot of things just because one can. Understand what really matters to your users, and focus on those.
 
 ## SLIs
-The types of measurements that speak for the reliability of your service will vary depending on its nature. In most cases though, they will fall into one of the categories from Google's SLI Menu:
+Measurements, right?  
+The types of measurements that speak for the reliability of your service may vary depending on its nature. In most cases though, they will fall into one of the categories from Google's SLI Menu:
 
 ![alt text](https://github.com/andreschaffer/slis-slos-examples/blob/main/sli_menu.jpg "SLI Menu image")
 
@@ -40,7 +41,8 @@ More definitions worth standardizing on per type of measurement and make your li
 - How frequently you take them, e.g. every 10 seconds, and your aggregation interval, e.g. over 1 minute.
 
 ## SLOs
-The aim with SLOs is to find the reliability line that will divide having happy users and having unhappy users. That is what we call our _good enough_ reliability. It’s easy to agree that setting a too low reliability target will lead to unhappy users. What may not be so obvious is that setting a too high reliability target will lead to, most often, unnecessary effort from your team to maintain it over the course of time. Even if your reliability numbers are super high today, don't lock your SLOs based on that. Many times your users may still be happy with a target less demanding on you. Try to really find your _good enough_ reliability and invest the rest of your time in other types of value to your users.
+Targets, right?  
+The aim with SLOs will be to find the reliability line that divides having happy users and having unhappy users. That is what we call our _good enough_ reliability. It’s easy to agree that setting a too low reliability target will lead to unhappy users. What may not be so obvious is that setting a too high reliability target will lead to, most often, unnecessary effort from your team to maintain it over the course of time. Even if your reliability numbers are super high today, don't lock your SLOs based on that. Many times your users may still be happy with a target less demanding on you. Try to really find your _good enough_ reliability and invest the rest of your time in other types of value to your users.
 
 TODO continue
 
