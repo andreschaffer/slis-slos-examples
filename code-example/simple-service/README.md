@@ -10,6 +10,6 @@ or
 ```
 docker build -t simple-service .
 kubectl apply -f deployment/deployment.yaml
-kubectl -n simple-service port-forward service/simple-service 8888
+kubectl -n simple-service port-forward service/simple-service 8888 8889
 curl localhost:8888/ping
 ```

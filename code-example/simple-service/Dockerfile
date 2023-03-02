@@ -9,5 +9,6 @@ RUN go mod download
 RUN go build -o ./bin/simple-service ./cmd
 
 EXPOSE 8888
+EXPOSE 8889
 
 CMD [ "./bin/simple-service" ]

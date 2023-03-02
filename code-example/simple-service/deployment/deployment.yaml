@@ -28,7 +28,7 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8888
-            #- containerPort: 8889
+            - containerPort: 8889
 
 ---
 
@@ -47,7 +47,7 @@ spec:
       protocol: TCP
       port: 8888
       targetPort: 8888
-    #- name: admin
-    #  protocol: TCP
-    #  port: 8889
-    #  targetPort: 8889
+    - name: admin
+      protocol: TCP
+      port: 8889
+      targetPort: 8889

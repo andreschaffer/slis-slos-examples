@@ -17,10 +17,13 @@ func main() {
 	registerDefaultCollectors(registry)
 
 	metrics := middleware.NewMetrics(registry, nil)
-	registerAdminRoutes(registry, metrics)
-	registerAppRoutes(registry, metrics)
+	adminMux := adminMux(registry, metrics)
+	appMux := appMux(registry, metrics)
 
-	log.Fatalln(http.ListenAndServe(":8888", nil))
+	go func() {
+		log.Fatalln(http.ListenAndServe(":8889", adminMux))
+	}()
+	log.Fatalln(http.ListenAndServe(":8888", appMux))
 }
 
 func registerDefaultCollectors(registry *prometheus.Registry) {
@@ -30,14 +33,19 @@ func registerDefaultCollectors(registry *prometheus.Registry) {
 	)
 }
 
-func registerAdminRoutes(registry *prometheus.Registry, metrics middleware.Metrics) {
+func adminMux(registry *prometheus.Registry, metrics middleware.Metrics) *http.ServeMux {
+	serverMux := http.NewServeMux()
 	metricsRoute := "/metrics"
 	metricsHandler := metrics.WrapHandler(metricsRoute, promhttp.HandlerFor(registry, promhttp.HandlerOpts{}))
-	http.Handle(metricsRoute, metricsHandler)
+	serverMux.Handle(metricsRoute, metricsHandler)
+	return serverMux
+
 }
 
-func registerAppRoutes(registry *prometheus.Registry, metrics middleware.Metrics) {
+func appMux(registry *prometheus.Registry, metrics middleware.Metrics) *http.ServeMux {
+	serverMux := http.NewServeMux()
 	pingRoute := "/ping"
 	pingHandler := metrics.WrapHandler(pingRoute, handlers.Ping())
-	http.Handle(pingRoute, pingHandler)
+	serverMux.Handle(pingRoute, pingHandler)
+	return serverMux
 }
