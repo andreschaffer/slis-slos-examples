@@ -76,7 +76,7 @@ func (m *metrics) WrapHandler(handlerName string, handler http.Handler) http.Han
 
 func NewMetrics(registry prometheus.Registerer, buckets []float64) *metrics {
 	if buckets == nil {
-		buckets = prometheus.ExponentialBuckets(0.1, 1.5, 5)
+		buckets = []float64{0.1, 0.25, 0.5, 1, 2, 3, 5, 10}
 	}
 
 	return &metrics{
