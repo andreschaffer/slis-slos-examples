@@ -9,4 +9,4 @@ curl localhost:3000
 
 ## Setup
 - Add Prometheus Data Source
-- Import [Dashboard Ping SLO](dashboard-ping-slo.json)
+- Import Dashboard [Ping SLO](dashboard/ping-slo.json)
