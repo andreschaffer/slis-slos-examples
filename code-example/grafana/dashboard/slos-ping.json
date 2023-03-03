@@ -370,7 +370,7 @@
             "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "job:sli_availability:rate28d{app=\"$app\",handler=\"$handler\"}",
+          "expr": "app_handler:sli_availability:rate28d{app=\"$app\",handler=\"$handler\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "sli",
@@ -532,7 +532,7 @@
             "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "job:slo_availability:remaining_error_budget_slo95_28d{app=\"$app\",handler=\"$handler\"}",
+          "expr": "app_handler:slo_availability:remaining_error_budget_slo95_28d{app=\"$app\",handler=\"$handler\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "remaining",
