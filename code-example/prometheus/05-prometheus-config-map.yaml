@@ -31,6 +31,7 @@ data:
     - "http_response.rules.yaml"
     - "sli.rules.yaml"
     - "slo.rules.yaml"
+    - "slo_alert.rules.yaml"
 
   http_response.rules.yaml: |
     groups:
@@ -88,3 +89,23 @@ data:
 
           - record: job:slo_availability:remaining_error_budget_slo99_28d
             expr: 1 - (job:slo_availability:actual_error_rate28d / 1)
+
+  slo_alert.rules.yaml: |
+    groups:
+      - name: slo_alerts
+        rules:
+          - alert: slo_page
+            expr: |
+              ((100-job:sli_availability:rate1h) > (14.4*0.05*100) and (100-job:sli_availability:rate5m) > (14.4*0.05*100))
+              or
+              ((100-job:sli_availability:rate6h) > (6*0.05*100) and (100-job:sli_availability:rate30m) > (6*0.05*100))
+            labels:
+              severity: page
+
+          - alert: slo_ticket
+            expr: |
+              ((100-job:sli_availability:rate24h) > (3*0.05*100) and (100-job:sli_availability:rate2h) > (3*0.05*100))
+              or
+              ((100-job:sli_availability:rate3d) > (0.05*100) and (100-job:sli_availability:rate6h) > (0.05*100))
+            labels:
+              severity: ticket
