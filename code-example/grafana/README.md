@@ -8,5 +8,6 @@ curl localhost:3000
 ```
 
 ## Setup
+- Login with admin:admin
 - Add Prometheus Data Source
 - Import Dashboard [Ping SLO](dashboard/ping-slo.json)
