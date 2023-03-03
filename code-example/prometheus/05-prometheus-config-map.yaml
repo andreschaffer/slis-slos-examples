@@ -22,3 +22,7 @@ data:
       - source_labels: [__meta_kubernetes_service_annotation_prometheus, __meta_kubernetes_endpoint_port_name]
         action: keep
         regex: true;admin
+      - separator: ;
+        regex: __meta_kubernetes_pod_label_(.+)
+        replacement: $1
+        action: labelmap

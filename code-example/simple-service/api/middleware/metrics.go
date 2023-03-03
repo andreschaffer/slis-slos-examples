@@ -29,7 +29,8 @@ func (m *metrics) WrapHandler(handlerName string, handler http.Handler) http.Han
 		prometheus.CounterOpts{
 			Name: "http_requests_total",
 			Help: "Tracks the number of HTTP requests.",
-		}, []string{"method", "code"},
+		},
+		[]string{"method", "code"},
 	)
 	requestDuration := promauto.With(reg).NewHistogramVec(
 		prometheus.HistogramOpts{
