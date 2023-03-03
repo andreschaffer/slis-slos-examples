@@ -53,9 +53,6 @@ data:
           - record: job:sli_availability:rate5m
             expr: (sum by (job,app,handler) (rate(task:http_response_success_count[5m])) / sum by (job,app,handler) (rate(task:http_response_total_count[5m]))) * 100
 
-          - record: job:sli_availability:rate10m
-            expr: (sum by (job,app,handler) (rate(task:http_response_success_count[10m])) / sum by (job,app,handler) (rate(task:http_response_total_count[10m]))) * 100
-
           - record: job:sli_availability:rate30m
             expr: (sum by (job,app,handler) (rate(task:http_response_success_count[30m])) / sum by (job,app,handler) (rate(task:http_response_total_count[30m]))) * 100
 
