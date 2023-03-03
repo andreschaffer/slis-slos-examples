@@ -532,7 +532,7 @@
             "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "app_action:slo_availability:remaining_error_budget_slo95_28d{app=\"$app\",action=\"$action\"}",
+          "expr": "app_action:slo_availability95_error_budget:rate28d{app=\"$app\",action=\"$action\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "remaining",

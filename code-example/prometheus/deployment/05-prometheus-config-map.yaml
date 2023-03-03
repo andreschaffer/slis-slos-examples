@@ -78,14 +78,14 @@ data:
     groups:
       - name: slo_availability
         rules:
-          - record: app_action:slo_availability:actual_error_rate28d
+          - record: app_action:sli_availability_error:rate28d
             expr: 1 - (app_action:sli_availability:rate28d)
 
-          - record: app_action:slo_availability:remaining_error_budget_slo95_28d
-            expr: 1 - (app_action:slo_availability:actual_error_rate28d / 0.05)
+          - record: app_action:slo_availability95_error_budget:rate28d
+            expr: 1 - (app_action:sli_availability_error:rate28d / 0.05)
 
-          - record: app_action:slo_availability:remaining_error_budget_slo99_28d
-            expr: 1 - (app_action:slo_availability:actual_error_rate28d / 0.01)
+          - record: app_action:slo_availability99_error_budget:rate28d
+            expr: 1 - (app_action:sli_availability_error:rate28d / 0.01)
 
   slo_alert.rules.yaml: |
     groups:
