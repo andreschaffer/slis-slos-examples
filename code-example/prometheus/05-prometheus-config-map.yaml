@@ -26,3 +26,80 @@ data:
         regex: __meta_kubernetes_pod_label_(.+)
         replacement: $1
         action: labelmap
+
+    rule_files:
+    - "recording.rules.yaml"
+    - "slos.rules.yaml"
+
+  recording.rules.yaml: |
+    groups:
+    - name: http_requests
+      rules:
+        - record: task:http_response_error_count
+          expr: http_requests_total{code=~"5[0-9]{2}"}
+
+        - record: task:http_response_total_count
+          expr: http_requests_total{code=~"[0-9]{3}"}
+
+  slos.rules.yaml: |
+    # This file based on the work from
+    # https://landing.google.com/sre/workbook/chapters/alerting-on-slos/
+    groups:
+      - name: slo_metrics
+        rules:
+          - record: job:slo_errors_per_request:ratio_rate5m
+            expr: sum by (job,app) (rate(task:http_response_error_count[5m])) / sum by (job,app) (rate(task:http_response_total_count[5m]))
+
+          - record: job:slo_errors_per_request:ratio_rate10m
+            expr: sum by (job,app) (rate(task:http_response_error_count[10m])) / sum by (job,app) (rate(task:http_response_total_count[10m]))
+
+          - record: job:slo_errors_per_request:ratio_rate30m
+            expr: sum by (job,app) (rate(task:http_response_error_count[30m])) / sum by (job,app) (rate(task:http_response_total_count[30m]))
+
+          - record: job:slo_errors_per_request:ratio_rate1h
+            expr: sum by (job,app) (rate(task:http_response_error_count[1h])) / sum by (job,app) (rate(task:http_response_total_count[1h]))
+
+          - record: job:slo_errors_per_request:ratio_rate2h
+            expr: sum by (job,app) (rate(task:http_response_error_count[2h])) / sum by (job,app) (rate(task:http_response_total_count[2h]))
+
+          - record: job:slo_errors_per_request:ratio_rate6h
+            expr: sum by (job,app) (rate(task:http_response_error_count[6h])) / sum by (job,app) (rate(task:http_response_total_count[6h]))
+
+          - record: job:slo_errors_per_request:ratio_rate24h
+            expr: sum by (job,app) (rate(task:http_response_error_count[24h])) / sum by (job,app) (rate(task:http_response_total_count[24h]))
+
+          - record: job:slo_errors_per_request:ratio_rate3d
+            expr: sum by (job,app) (rate(task:http_response_error_count[3d])) / sum by (job,app) (rate(task:http_response_total_count[3d]))
+
+          - record: job:slo_errors_per_request:ratio_rate28d
+            expr: sum by (job,app) (rate(task:http_response_error_count[28d])) / sum by (job,app) (rate(task:http_response_total_count[28d]))
+
+          - record: job:error_budget:remaining
+            expr: (1 - job:slo_errors_per_request:ratio_rate28d) * 100
+
+          - record: job:error_budget:slo90
+            expr: (1 - 0.10) * 100
+
+          - record: job:error_budget:slo95
+            expr: (1 - 0.05) * 100
+
+          - record: job:error_budget:slo99
+            expr: (1 - 0.01) * 100
+
+      - name: slo_alerts
+        rules:
+          - alert: slo_page
+            expr: |
+              (job:slo_errors_per_request:ratio_rate1h > (14.4*0.05) and job:slo_errors_per_request:ratio_rate5m > (14.4*0.05))
+              or
+              (job:slo_errors_per_request:ratio_rate6h > (6*0.05) and job:slo_errors_per_request:ratio_rate30m > (6*0.05))
+            labels:
+              severity: page
+
+          - alert: slo_ticket
+            expr: |
+              (job:slo_errors_per_request:ratio_rate24h > (3*0.05) and job:slo_errors_per_request:ratio_rate2h > (3*0.05))
+              or
+              (job:slo_errors_per_request:ratio_rate3d > 0.05 and job:slo_errors_per_request:ratio_rate6h > 0.05)
+            labels:
+              severity: ticket
