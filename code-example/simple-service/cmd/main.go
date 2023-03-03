@@ -35,8 +35,9 @@ func registerDefaultCollectors(registry *prometheus.Registry) {
 
 func adminMux(registry *prometheus.Registry, metrics middleware.Metrics) *http.ServeMux {
 	serverMux := http.NewServeMux()
+	metricsAction := "metrics"
 	metricsRoute := "/metrics"
-	metricsHandler := metrics.WrapHandler(metricsRoute, promhttp.HandlerFor(registry, promhttp.HandlerOpts{}))
+	metricsHandler := metrics.WrapHandler(metricsAction, promhttp.HandlerFor(registry, promhttp.HandlerOpts{}))
 	serverMux.Handle(metricsRoute, metricsHandler)
 	return serverMux
 
@@ -44,8 +45,9 @@ func adminMux(registry *prometheus.Registry, metrics middleware.Metrics) *http.S
 
 func appMux(registry *prometheus.Registry, metrics middleware.Metrics) *http.ServeMux {
 	serverMux := http.NewServeMux()
+	pingAction := "ping"
 	pingRoute := "/ping"
-	pingHandler := metrics.WrapHandler(pingRoute, handlers.Ping())
+	pingHandler := metrics.WrapHandler(pingAction, handlers.Ping())
 	serverMux.Handle(pingRoute, pingHandler)
 	return serverMux
 }

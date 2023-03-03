@@ -121,7 +121,7 @@
             "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "max(ALERTS{alertstate=\"firing\",severity=\"ticket\",app=\"$app\",handler=\"$handler\"} or on() vector(0))",
+          "expr": "max(ALERTS{alertstate=\"firing\",severity=\"ticket\",app=\"$app\",action=\"$action\"} or on() vector(0))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "__auto",
@@ -224,7 +224,7 @@
             "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "max(ALERTS{alertstate=\"firing\",severity=\"page\",app=\"$app\",handler=\"$handler\"} or on() vector(0))",
+          "expr": "max(ALERTS{alertstate=\"firing\",severity=\"page\",app=\"$app\",action=\"$action\"} or on() vector(0))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "__auto",
@@ -370,7 +370,7 @@
             "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "app_handler:sli_availability:rate28d{app=\"$app\",handler=\"$handler\"}",
+          "expr": "app_action:sli_availability:rate28d{app=\"$app\",action=\"$action\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "sli",
@@ -532,7 +532,7 @@
             "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "app_handler:slo_availability:remaining_error_budget_slo95_28d{app=\"$app\",handler=\"$handler\"}",
+          "expr": "app_action:slo_availability:remaining_error_budget_slo95_28d{app=\"$app\",action=\"$action\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "remaining",
@@ -690,7 +690,7 @@
             "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(rate(task:http_response_total_count{app=\"$app\",handler=\"$handler\"}[1m])) by (job,app,handler)",
+          "expr": "sum(rate(task:http_response_total_count{app=\"$app\",action=\"$action\"}[1m])) by (job,app,action)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "total requests rate",
@@ -702,7 +702,7 @@
             "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(rate(task:http_response_error_count{app=\"$app\",handler=\"$handler\"}[1m])) by (job,app,handler)",
+          "expr": "sum(rate(task:http_response_error_count{app=\"$app\",action=\"$action\"}[1m])) by (job,app,action)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "error responses rate",
@@ -731,8 +731,8 @@
       },
       {
         "hide": 2,
-        "name": "handler",
-        "query": "/ping",
+        "name": "action",
+        "query": "ping",
         "skipUrlSync": false,
         "type": "constant"
       }

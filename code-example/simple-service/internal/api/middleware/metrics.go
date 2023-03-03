@@ -9,7 +9,7 @@ import (
 )
 
 type Metrics interface {
-	WrapHandler(handlerName string, handler http.Handler) http.HandlerFunc
+	WrapHandler(action string, handler http.Handler) http.HandlerFunc
 }
 
 type metrics struct {
@@ -29,8 +29,8 @@ func NewMetrics(registry prometheus.Registerer) *metrics {
 // metrics to the (newly or already) registered collectors.
 // Each has a constant label named "handler" with the provided handlerName as
 // value.
-func (m *metrics) WrapHandler(handlerName string, handler http.Handler) http.HandlerFunc {
-	reg := prometheus.WrapRegistererWith(prometheus.Labels{"handler": handlerName}, m.registry)
+func (m *metrics) WrapHandler(action string, handler http.Handler) http.HandlerFunc {
+	reg := prometheus.WrapRegistererWith(prometheus.Labels{"action": action}, m.registry)
 
 	labels := []string{"method", "code"}
 
