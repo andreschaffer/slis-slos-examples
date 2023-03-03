@@ -25,12 +25,14 @@ type metrics struct {
 func (m *metrics) WrapHandler(handlerName string, handler http.Handler) http.HandlerFunc {
 	reg := prometheus.WrapRegistererWith(prometheus.Labels{"handler": handlerName}, m.registry)
 
+    labels := []string{"method", "code"}
+
 	requestsTotal := promauto.With(reg).NewCounterVec(
 		prometheus.CounterOpts{
 			Name: "http_requests_total",
 			Help: "Tracks the number of HTTP requests.",
 		},
-		[]string{"method", "code"},
+		labels,
 	)
 	requestDuration := promauto.With(reg).NewHistogramVec(
 		prometheus.HistogramOpts{
@@ -38,21 +40,21 @@ func (m *metrics) WrapHandler(handlerName string, handler http.Handler) http.Han
 			Help:    "Tracks the latencies for HTTP requests.",
 			Buckets: m.buckets,
 		},
-		[]string{"method", "code"},
+		labels,
 	)
 	requestSize := promauto.With(reg).NewSummaryVec(
 		prometheus.SummaryOpts{
 			Name: "http_request_size_bytes",
 			Help: "Tracks the size of HTTP requests.",
 		},
-		[]string{"method", "code"},
+		labels,
 	)
 	responseSize := promauto.With(reg).NewSummaryVec(
 		prometheus.SummaryOpts{
 			Name: "http_response_size_bytes",
 			Help: "Tracks the size of HTTP responses.",
 		},
-		[]string{"method", "code"},
+		labels,
 	)
 
 	// Wraps the provided http.Handler to observe the request result with the provided metrics.
