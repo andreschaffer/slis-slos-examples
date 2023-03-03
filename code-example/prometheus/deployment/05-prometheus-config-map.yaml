@@ -51,41 +51,41 @@ data:
       - name: slis
         rules:
           - record: job:sli_availability:rate5m
-            expr: (sum by (job,app,handler) (rate(task:http_response_success_count[5m])) / sum by (job,app,handler) (rate(task:http_response_total_count[5m]))) * 100
+            expr: sum by (job,app,handler) (rate(task:http_response_success_count[5m])) / sum by (job,app,handler) (rate(task:http_response_total_count[5m]))
 
           - record: job:sli_availability:rate30m
-            expr: (sum by (job,app,handler) (rate(task:http_response_success_count[30m])) / sum by (job,app,handler) (rate(task:http_response_total_count[30m]))) * 100
+            expr: sum by (job,app,handler) (rate(task:http_response_success_count[30m])) / sum by (job,app,handler) (rate(task:http_response_total_count[30m]))
 
           - record: job:sli_availability:rate1h
-            expr: (sum by (job,app,handler) (rate(task:http_response_success_count[1h])) / sum by (job,app,handler) (rate(task:http_response_total_count[1h]))) * 100
+            expr: sum by (job,app,handler) (rate(task:http_response_success_count[1h])) / sum by (job,app,handler) (rate(task:http_response_total_count[1h]))
 
           - record: job:sli_availability:rate2h
-            expr: (sum by (job,app,handler) (rate(task:http_response_success_count[2h])) / sum by (job,app,handler) (rate(task:http_response_total_count[2h]))) * 100
+            expr: sum by (job,app,handler) (rate(task:http_response_success_count[2h])) / sum by (job,app,handler) (rate(task:http_response_total_count[2h]))
 
           - record: job:sli_availability:rate6h
-            expr: (sum by (job,app,handler) (rate(task:http_response_success_count[6h])) / sum by (job,app,handler) (rate(task:http_response_total_count[6h]))) * 100
+            expr: sum by (job,app,handler) (rate(task:http_response_success_count[6h])) / sum by (job,app,handler) (rate(task:http_response_total_count[6h]))
 
           - record: job:sli_availability:rate24h
-            expr: (sum by (job,app,handler) (rate(task:http_response_success_count[24h])) / sum by (job,app,handler) (rate(task:http_response_total_count[24h]))) * 100
+            expr: sum by (job,app,handler) (rate(task:http_response_success_count[24h])) / sum by (job,app,handler) (rate(task:http_response_total_count[24h]))
 
           - record: job:sli_availability:rate3d
-            expr: (sum by (job,app,handler) (rate(task:http_response_success_count[3d])) / sum by (job,app,handler) (rate(task:http_response_total_count[3d]))) * 100
+            expr: sum by (job,app,handler) (rate(task:http_response_success_count[3d])) / sum by (job,app,handler) (rate(task:http_response_total_count[3d]))
 
           - record: job:sli_availability:rate28d
-            expr: (sum by (job,app,handler) (rate(task:http_response_success_count[28d])) / sum by (job,app,handler) (rate(task:http_response_total_count[28d]))) * 100
+            expr: sum by (job,app,handler) (rate(task:http_response_success_count[28d])) / sum by (job,app,handler) (rate(task:http_response_total_count[28d]))
 
   slo.rules.yaml: |
     groups:
       - name: slos
         rules:
           - record: job:slo_availability:actual_error_rate28d
-            expr: 100 - (job:sli_availability:rate28d)
+            expr: 1 - (job:sli_availability:rate28d)
 
           - record: job:slo_availability:remaining_error_budget_slo95_28d
-            expr: 100 - (job:slo_availability:actual_error_rate28d / 0.05)
+            expr: 1 - (job:slo_availability:actual_error_rate28d / 0.05)
 
           - record: job:slo_availability:remaining_error_budget_slo99_28d
-            expr: 100 - (job:slo_availability:actual_error_rate28d / 0.01)
+            expr: 1 - (job:slo_availability:actual_error_rate28d / 0.01)
 
   slo_alert.rules.yaml: |
     groups:
@@ -93,16 +93,16 @@ data:
         rules:
           - alert: slo_page
             expr: |
-              ((100-job:sli_availability:rate1h) > (14.4*0.05*100) and (100-job:sli_availability:rate5m) > (14.4*0.05*100))
+              ((1-job:sli_availability:rate1h) > (14.4*0.05) and (1-job:sli_availability:rate5m) > (14.4*0.05))
               or
-              ((100-job:sli_availability:rate6h) > (6*0.05*100) and (100-job:sli_availability:rate30m) > (6*0.05*100))
+              ((1-job:sli_availability:rate6h) > (6*0.05) and (1-job:sli_availability:rate30m) > (6*0.05))
             labels:
               severity: page
 
           - alert: slo_ticket
             expr: |
-              ((100-job:sli_availability:rate24h) > (3*0.05*100) and (100-job:sli_availability:rate2h) > (3*0.05*100))
+              ((1-job:sli_availability:rate24h) > (3*0.05) and (1-job:sli_availability:rate2h) > (3*0.05))
               or
-              ((100-job:sli_availability:rate3d) > (0.05*100) and (100-job:sli_availability:rate6h) > (0.05*100))
+              ((1-job:sli_availability:rate3d) > 0.05 and (1-job:sli_availability:rate6h) > 0.05)
             labels:
               severity: ticket

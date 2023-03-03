@@ -74,7 +74,6 @@
               "type": "range"
             }
           ],
-          "noValue": "0",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -119,8 +118,7 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "LnrNQEb4z"
+            "type": "prometheus"
           },
           "editorMode": "code",
           "expr": "max(ALERTS{alertstate=\"firing\",severity=\"ticket\",app=\"$app\",handler=\"$handler\"} or on() vector(0))",
@@ -179,7 +177,6 @@
               "type": "range"
             }
           ],
-          "noValue": "0",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -224,8 +221,7 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "LnrNQEb4z"
+            "type": "prometheus"
           },
           "editorMode": "code",
           "expr": "max(ALERTS{alertstate=\"firing\",severity=\"page\",app=\"$app\",handler=\"$handler\"} or on() vector(0))",
@@ -250,7 +246,7 @@
       },
       "id": 30,
       "panels": [],
-      "title": "Availability",
+      "title": "Availability (>= 95%)",
       "type": "row"
     },
     {
@@ -293,7 +289,7 @@
             }
           },
           "mappings": [],
-          "max": 100,
+          "max": 1,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -303,11 +299,11 @@
               },
               {
                 "color": "green",
-                "value": 95
+                "value": 0.95
               }
             ]
           },
-          "unit": "percent"
+          "unit": "percentunit"
         },
         "overrides": [
           {
@@ -371,8 +367,7 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "LnrNQEb4z"
+            "type": "prometheus"
           },
           "editorMode": "code",
           "expr": "job:sli_availability:rate28d{app=\"$app\",handler=\"$handler\"}",
@@ -426,7 +421,7 @@
             }
           },
           "mappings": [],
-          "max": 100,
+          "max": 1,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -440,7 +435,7 @@
               }
             ]
           },
-          "unit": "percent"
+          "unit": "percentunit"
         },
         "overrides": [
           {
@@ -534,8 +529,7 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "LnrNQEb4z"
+            "type": "prometheus"
           },
           "editorMode": "code",
           "expr": "job:slo_availability:remaining_error_budget_slo95_28d{app=\"$app\",handler=\"$handler\"}",
@@ -550,7 +544,7 @@
       "type": "timeseries"
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -559,7 +553,7 @@
       },
       "id": 35,
       "panels": [],
-      "title": "Latency",
+      "title": "Latency (>= 95% faster than 100ms)",
       "type": "row"
     },
     {
@@ -693,8 +687,7 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "LnrNQEb4z"
+            "type": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(rate(task:http_response_total_count{app=\"$app\",handler=\"$handler\"}[1m])) by (job,app,handler)",
@@ -706,11 +699,10 @@
         },
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "LnrNQEb4z"
+            "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(rate(task:http_response_error_count{handler=\"$handler\"}[1m])) by (job,app,handler)",
+          "expr": "sum(rate(task:http_response_error_count{app=\"$app\",handler=\"$handler\"}[1m])) by (job,app,handler)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "error responses rate",
@@ -772,8 +764,8 @@
     ]
   },
   "timezone": "",
-  "title": "SLOs - Ping - 28d",
+  "title": "SLOs - Ping [28d]",
   "uid": "389KVPx4z",
-  "version": 4,
+  "version": 1,
   "weekStart": ""
 }
