@@ -26,14 +26,14 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 11222,
   "graphTooltip": 0,
-  "id": 4,
+  "id": 1,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "NngXQfb4z"
+        "uid": "LnrNQEb4z"
       },
       "fieldConfig": {
         "defaults": {
@@ -121,7 +121,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "NngXQfb4z"
+            "uid": "LnrNQEb4z"
           },
           "editorMode": "code",
           "expr": "max(ALERTS{alertstate=\"firing\",severity=\"ticket\",app=\"$app\",handler=\"$handler\"} or on() vector(0))",
@@ -139,7 +139,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "NngXQfb4z"
+        "uid": "LnrNQEb4z"
       },
       "fieldConfig": {
         "defaults": {
@@ -227,7 +227,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "NngXQfb4z"
+            "uid": "LnrNQEb4z"
           },
           "editorMode": "code",
           "expr": "max(ALERTS{alertstate=\"firing\",severity=\"page\",app=\"$app\",handler=\"$handler\"} or on() vector(0))",
@@ -258,7 +258,141 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "NngXQfb4z"
+        "uid": "LnrNQEb4z"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
+          },
+          "mappings": [],
+          "max": 100,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "real"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sli"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 3
+      },
+      "id": 22,
+      "links": [],
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "sortBy": "Last *",
+          "sortDesc": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.4.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "LnrNQEb4z"
+          },
+          "editorMode": "code",
+          "expr": "job:sli_availability:rate28d{app=\"$app\",handler=\"$handler\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "sli",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "SLO",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "LnrNQEb4z"
       },
       "fieldConfig": {
         "defaults": {
@@ -357,13 +491,28 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "remaining"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
       "gridPos": {
         "h": 8,
         "w": 12,
-        "x": 0,
+        "x": 12,
         "y": 3
       },
       "id": 33,
@@ -390,24 +539,50 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "NngXQfb4z"
+            "uid": "LnrNQEb4z"
           },
           "editorMode": "code",
           "expr": "job:slo_availability:remaining_error_budget_slo95_28d{app=\"$app\",handler=\"$handler\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "percentage",
+          "legendFormat": "remaining",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Remaining Error Budget",
+      "title": "Error Budget",
       "type": "timeseries"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 11
+      },
+      "id": 35,
+      "panels": [],
+      "title": "Latency",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "id": 32,
+      "panels": [],
+      "title": "Traffic",
+      "type": "row"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "NngXQfb4z"
+        "uid": "LnrNQEb4z"
       },
       "fieldConfig": {
         "defaults": {
@@ -421,7 +596,7 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 10,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -441,31 +616,31 @@
               "mode": "none"
             },
             "thresholdsStyle": {
-              "mode": "area"
+              "mode": "off"
             }
           },
           "mappings": [],
-          "max": 100,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
+                "color": "green",
                 "value": null
               },
               {
-                "color": "green",
-                "value": 95
+                "color": "red",
+                "value": 80
               }
             ]
           },
-          "unit": "percent"
+          "unit": "reqps"
         },
         "overrides": [
           {
             "matcher": {
               "id": "byName",
-              "options": "real"
+              "options": "total requests rate"
             },
             "properties": [
               {
@@ -480,13 +655,13 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "sli"
+              "options": "error responses rate"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "light-blue",
+                  "fixedColor": "light-red",
                   "mode": "fixed"
                 }
               }
@@ -495,18 +670,18 @@
         ]
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 3
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 13
       },
-      "id": 22,
+      "id": 24,
       "links": [],
       "options": {
         "legend": {
           "calcs": [
             "lastNotNull",
-            "min"
+            "max"
           ],
           "displayMode": "table",
           "placement": "bottom",
@@ -524,192 +699,32 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "NngXQfb4z"
+            "uid": "LnrNQEb4z"
           },
           "editorMode": "code",
-          "expr": "job:sli_availability:rate28d{app=\"$app\",handler=\"$handler\"}",
+          "expr": "sum(rate(task:http_response_total_count{app=\"$app\",handler=\"$handler\"}[1m])) by (job,app,handler)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "sli",
+          "legendFormat": "total requests rate",
           "range": true,
           "refId": "A"
-        }
-      ],
-      "title": "SLO",
-      "type": "timeseries"
-    },
-    {
-      "collapsed": true,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 11
-      },
-      "id": 35,
-      "panels": [],
-      "title": "Latency",
-      "type": "row"
-    },
-    {
-      "collapsed": true,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 12
-      },
-      "id": 32,
-      "panels": [
+        },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "NngXQfb4z"
+            "uid": "LnrNQEb4z"
           },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 10,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "never",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "mappings": [],
-              "min": 0,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "reqps"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "total requests rate"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "light-blue",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "error responses rate"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "light-red",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 7,
-            "w": 24,
-            "x": 0,
-            "y": 13
-          },
-          "id": 24,
-          "links": [],
-          "options": {
-            "legend": {
-              "calcs": [
-                "lastNotNull",
-                "max"
-              ],
-              "displayMode": "table",
-              "placement": "bottom",
-              "showLegend": true,
-              "sortBy": "Last *",
-              "sortDesc": true
-            },
-            "tooltip": {
-              "mode": "multi",
-              "sort": "none"
-            }
-          },
-          "pluginVersion": "9.4.2",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "NngXQfb4z"
-              },
-              "editorMode": "code",
-              "expr": "sum(rate(task:http_response_total_count{app=\"$app\",handler=\"$handler\"}[1m])) by (job,app,handler)",
-              "format": "time_series",
-              "intervalFactor": 1,
-              "legendFormat": "total requests rate",
-              "range": true,
-              "refId": "A"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "NngXQfb4z"
-              },
-              "editorMode": "code",
-              "expr": "sum(rate(task:http_response_error_count{handler=\"$handler\"}[1m])) by (job,app,handler)",
-              "format": "time_series",
-              "intervalFactor": 1,
-              "legendFormat": "error responses rate",
-              "range": true,
-              "refId": "B"
-            }
-          ],
-          "title": "Requests Rate",
-          "type": "timeseries"
+          "editorMode": "code",
+          "expr": "sum(rate(task:http_response_error_count{handler=\"$handler\"}[1m])) by (job,app,handler)",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "error responses rate",
+          "range": true,
+          "refId": "B"
         }
       ],
-      "title": "Traffic",
-      "type": "row"
+      "title": "Requests Rate",
+      "type": "timeseries"
     }
   ],
   "refresh": "",
@@ -764,6 +779,6 @@
   "timezone": "",
   "title": "SLOs - Ping - 28d",
   "uid": "389KVPx4z",
-  "version": 65,
+  "version": 4,
   "weekStart": ""
 }
