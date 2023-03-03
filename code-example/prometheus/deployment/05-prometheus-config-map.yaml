@@ -85,10 +85,10 @@ data:
             expr: 100 - (job:sli_availability:rate28d)
 
           - record: job:slo_availability:remaining_error_budget_slo95_28d
-            expr: 1 - (job:slo_availability:actual_error_rate28d / 5)
+            expr: 100 - (job:slo_availability:actual_error_rate28d / 5)
 
           - record: job:slo_availability:remaining_error_budget_slo99_28d
-            expr: 1 - (job:slo_availability:actual_error_rate28d / 1)
+            expr: 100 - (job:slo_availability:actual_error_rate28d / 1)
 
   slo_alert.rules.yaml: |
     groups:
