@@ -2,7 +2,7 @@
 
 ## Deploying locally with Kubernetes
 ```
-kubectl apply -f .
+kubectl apply -f deployment/.
 kubectl port-forward service/grafana-service 3000 -n grafana
 curl localhost:3000
 ```

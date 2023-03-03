@@ -2,7 +2,7 @@
 
 ## Deploying locally with Kubernetes
 ```
-kubectl apply -f .
+kubectl apply -f deployment/.
 kubectl port-forward service/prometheus-service 9090 -n prometheus
 curl localhost:9090
 ```
