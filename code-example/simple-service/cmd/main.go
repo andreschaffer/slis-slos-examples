@@ -8,15 +8,15 @@ import (
 	"github.com/prometheus/client_golang/prometheus/collectors"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
-	"github.com/andreschaffer/slis-slos-examples/simple-service/api/handlers"
-	"github.com/andreschaffer/slis-slos-examples/simple-service/api/middleware"
+	"github.com/andreschaffer/slis-slos-examples/simple-service/internal/api/handlers"
+	"github.com/andreschaffer/slis-slos-examples/simple-service/internal/api/middleware"
 )
 
 func main() {
 	registry := prometheus.NewRegistry()
 	registerDefaultCollectors(registry)
 
-	metrics := middleware.NewMetrics(registry, nil)
+	metrics := middleware.NewMetrics(registry)
 	adminMux := adminMux(registry, metrics)
 	appMux := appMux(registry, metrics)
 

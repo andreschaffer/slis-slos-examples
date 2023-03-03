@@ -17,6 +17,13 @@ type metrics struct {
 	buckets  []float64
 }
 
+func NewMetrics(registry prometheus.Registerer) *metrics {
+	return &metrics{
+		registry: registry,
+		buckets:  []float64{0.1, 0.25, 0.5, 1, 2, 3, 5, 10},
+	}
+}
+
 // WrapHandler wraps the given HTTP handler for instrumentation:
 // It registers four metric collectors (if not already done) and reports HTTP
 // metrics to the (newly or already) registered collectors.
@@ -25,7 +32,7 @@ type metrics struct {
 func (m *metrics) WrapHandler(handlerName string, handler http.Handler) http.HandlerFunc {
 	reg := prometheus.WrapRegistererWith(prometheus.Labels{"handler": handlerName}, m.registry)
 
-    labels := []string{"method", "code"}
+	labels := []string{"method", "code"}
 
 	requestsTotal := promauto.With(reg).NewCounterVec(
 		prometheus.CounterOpts{
@@ -75,15 +82,4 @@ func (m *metrics) WrapHandler(handlerName string, handler http.Handler) http.Han
 	)
 
 	return base.ServeHTTP
-}
-
-func NewMetrics(registry prometheus.Registerer, buckets []float64) *metrics {
-	if buckets == nil {
-		buckets = []float64{0.1, 0.25, 0.5, 1, 2, 3, 5, 10}
-	}
-
-	return &metrics{
-		registry: registry,
-		buckets:  buckets,
-	}
 }
