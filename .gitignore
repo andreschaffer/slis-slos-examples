@@ -4,4 +4,4 @@
 **/*.iws
 
 # Binaries
-**/*.bin/
+**/bin/
