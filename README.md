@@ -58,7 +58,7 @@ If you would like to help making this project better, see the [CONTRIBUTING.md](
 
 # Maintainers
 
-Send any other comments, flowers and suggestions to [André Schaffer](https://github.com/andreschaffer).
+Send any other comments, flowers and suggestions to [André Schaffer](https://github.com/andreschaffer) and [Jefferson Girão](https://github.com/jeffersongirao).
 
 # License
 This project is distributed under the [MIT License](LICENSE).
