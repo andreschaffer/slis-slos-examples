@@ -1,0 +1,189 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: prometheus
+  name: prometheus-config-map
+data:
+  prometheus.yaml: |
+    global:
+      scrape_interval: 10s
+      evaluation_interval: 10s
+
+    scrape_configs:
+    - job_name: 'prometheus-scraper'
+
+      kubernetes_sd_configs:
+      - role: endpoints
+
+      scheme: http
+      metrics_path: /metrics
+
+      relabel_configs:
+      - source_labels: [__meta_kubernetes_service_annotation_prometheus, __meta_kubernetes_endpoint_port_name]
+        action: keep
+        regex: true;admin
+      - separator: ;
+        regex: __meta_kubernetes_pod_label_(.+)
+        replacement: $1
+        action: labelmap
+
+    rule_files:
+    - "http_response.rules.yaml"
+    - "sli.rules.yaml"
+    - "slo.rules.yaml"
+    - "slo_alert.rules.yaml"
+
+  http_response.rules.yaml: |
+    groups:
+    - name: http_response_count
+      rules:
+        - record: task:http_response_error_count
+          expr: http_requests_total{code=~"5[0-9]{2}"}
+
+        - record: task:http_response_success_count
+          expr: http_requests_total{code!~"5[0-9]{2}"}
+
+        - record: task:http_response_total_count
+          expr: http_requests_total{code=~"[0-9]{3}"}
+
+    - name: http_response_latency
+      rules:
+        - record: task:http_response_latency_count
+          expr: http_request_duration_seconds_count
+
+        - record: task:http_response_latency100ms
+          expr: http_request_duration_seconds_bucket{le="0.1"}
+
+        - record: task:http_response_latency250ms
+          expr: http_request_duration_seconds_bucket{le="0.25"}
+
+        - record: task:http_response_latency500ms
+          expr: http_request_duration_seconds_bucket{le="0.5"}
+
+        - record: task:http_response_latency1s
+          expr: http_request_duration_seconds_bucket{le="1"}
+
+        - record: task:http_response_latency2s
+          expr: http_request_duration_seconds_bucket{le="2"}
+
+        - record: task:http_response_latency3s
+          expr: http_request_duration_seconds_bucket{le="3"}
+
+        - record: task:http_response_latency5s
+          expr: http_request_duration_seconds_bucket{le="5"}
+
+        - record: task:http_response_latency10s
+          expr: http_request_duration_seconds_bucket{le="10"}
+
+  sli.rules.yaml: |
+    groups:
+      - name: sli_availability
+        rules:
+          - record: app_action:sli_availability:rate5m
+            expr: sum by (job,app,action) (rate(task:http_response_success_count[5m])) / sum by (job,app,action) (rate(task:http_response_total_count[5m]))
+
+          - record: app_action:sli_availability:rate30m
+            expr: sum by (job,app,action) (rate(task:http_response_success_count[30m])) / sum by (job,app,action) (rate(task:http_response_total_count[30m]))
+
+          - record: app_action:sli_availability:rate1h
+            expr: sum by (job,app,action) (rate(task:http_response_success_count[1h])) / sum by (job,app,action) (rate(task:http_response_total_count[1h]))
+
+          - record: app_action:sli_availability:rate2h
+            expr: sum by (job,app,action) (rate(task:http_response_success_count[2h])) / sum by (job,app,action) (rate(task:http_response_total_count[2h]))
+
+          - record: app_action:sli_availability:rate6h
+            expr: sum by (job,app,action) (rate(task:http_response_success_count[6h])) / sum by (job,app,action) (rate(task:http_response_total_count[6h]))
+
+          - record: app_action:sli_availability:rate24h
+            expr: sum by (job,app,action) (rate(task:http_response_success_count[24h])) / sum by (job,app,action) (rate(task:http_response_total_count[24h]))
+
+          - record: app_action:sli_availability:rate3d
+            expr: sum by (job,app,action) (rate(task:http_response_success_count[3d])) / sum by (job,app,action) (rate(task:http_response_total_count[3d]))
+
+          - record: app_action:sli_availability:rate28d
+            expr: sum by (job,app,action) (rate(task:http_response_success_count[28d])) / sum by (job,app,action) (rate(task:http_response_total_count[28d]))
+
+      - name: sli_latency
+        rules:
+          - record: app_action:sli_latency100ms:rate5m
+            expr: sum by (job,app,action) (rate(task:http_response_latency100ms[5m])) / sum by (job,app,action) (rate(task:http_response_latency_count[5m]))
+
+          - record: app_action:sli_latency100ms:rate30m
+            expr: sum by (job,app,action) (rate(task:http_response_latency100ms[30m])) / sum by (job,app,action) (rate(task:http_response_latency_count[30m]))
+
+          - record: app_action:sli_latency100ms:rate1h
+            expr: sum by (job,app,action) (rate(task:http_response_latency100ms[1h])) / sum by (job,app,action) (rate(task:http_response_latency_count[1h]))
+
+          - record: app_action:sli_latency100ms:rate2h
+            expr: sum by (job,app,action) (rate(task:http_response_latency100ms[2h])) / sum by (job,app,action) (rate(task:http_response_latency_count[2h]))
+
+          - record: app_action:sli_latency100ms:rate6h
+            expr: sum by (job,app,action) (rate(task:http_response_latency100ms[6h])) / sum by (job,app,action) (rate(task:http_response_latency_count[6h]))
+
+          - record: app_action:sli_latency100ms:rate24h
+            expr: sum by (job,app,action) (rate(task:http_response_latency100ms[24h])) / sum by (job,app,action) (rate(task:http_response_latency_count[24h]))
+
+          - record: app_action:sli_latency100ms:rate3d
+            expr: sum by (job,app,action) (rate(task:http_response_latency100ms[3d])) / sum by (job,app,action) (rate(task:http_response_latency_count[3d]))
+
+          - record: app_action:sli_latency100ms:rate28d
+            expr: sum by (job,app,action) (rate(task:http_response_latency100ms[28d])) / sum by (job,app,action) (rate(task:http_response_latency_count[28d]))
+
+  slo.rules.yaml: |
+    groups:
+      - name: slo_availability
+        rules:
+          - record: app_action:sli_availability_error:rate28d
+            expr: 1 - (app_action:sli_availability:rate28d)
+
+          - record: app_action:slo_availability95_error_budget:rate28d
+            expr: 1 - (app_action:sli_availability_error:rate28d / 0.05)
+
+          - record: app_action:slo_availability99_error_budget:rate28d
+            expr: 1 - (app_action:sli_availability_error:rate28d / 0.01)
+
+      - name: slo_latency
+        rules:
+          - record: app_action:sli_latency100ms_error:rate28d
+            expr: 1 - (app_action:sli_latency100ms:rate28d)
+
+          - record: app_action:slo_latency100ms95_error_budget:rate28d
+            expr: 1 - (app_action:sli_latency100ms_error:rate28d / 0.05)
+
+  slo_alert.rules.yaml: |
+    groups:
+      - name: slo_availability_alert
+        rules:
+          - alert: slo_availability_page
+            expr: |
+              ((1-app_action:sli_availability:rate1h) > (14.4*0.05) and (1-app_action:sli_availability:rate5m) > (14.4*0.05))
+              or
+              ((1-app_action:sli_availability:rate6h) > (6*0.05) and (1-app_action:sli_availability:rate30m) > (6*0.05))
+            labels:
+              severity: page
+
+          - alert: slo_availability_ticket
+            expr: |
+              ((1-app_action:sli_availability:rate24h) > (3*0.05) and (1-app_action:sli_availability:rate2h) > (3*0.05))
+              or
+              ((1-app_action:sli_availability:rate3d) > 0.05 and (1-app_action:sli_availability:rate6h) > 0.05)
+            labels:
+              severity: ticket
+
+      - name: slo_latency_alert
+        rules:
+          - alert: slo_latency_page
+            expr: |
+              ((1-app_action:sli_latency100ms:rate1h) > (14.4*0.05) and (1-app_action:sli_latency100ms:rate5m) > (14.4*0.05))
+              or
+              ((1-app_action:sli_latency100ms:rate6h) > (6*0.05) and (1-app_action:sli_latency100ms:rate30m) > (6*0.05))
+            labels:
+              severity: page
+
+          - alert: slo_latency_ticket
+            expr: |
+              ((1-app_action:sli_latency100ms:rate24h) > (3*0.05) and (1-app_action:sli_latency100ms:rate2h) > (3*0.05))
+              or
+              ((1-app_action:sli_latency100ms:rate3d) > 0.05 and (1-app_action:sli_latency100ms:rate6h) > 0.05)
+            labels:
+              severity: ticket

@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: grafana
+  name: grafana-config-map
+data:
+  grafana.ini: |
+    [database]
+    # You can configure the database connection by specifying type, host, name, user and password
+    # as seperate properties or as on string using the url propertie.
+
+    # Either "mysql", "postgres" or "sqlite3", it's your choice
+    type = postgres
+    host = grafana-postgres:5432
+    name = grafana
+    user = postgres
+    # If the password contains # or ; you have to wrap it with trippel quotes. Ex """#password;"""
+    password = postgres
+
+    # For "postgres" only, either "disable", "require" or "verify-full"
+    ssl_mode = disable
