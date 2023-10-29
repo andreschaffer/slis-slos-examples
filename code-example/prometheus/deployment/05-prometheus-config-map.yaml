@@ -14,8 +14,6 @@ data:
 
       kubernetes_sd_configs:
       - role: endpoints
-        selectors:
-          - role: endpoints
 
       scheme: http
       metrics_path: /metrics
