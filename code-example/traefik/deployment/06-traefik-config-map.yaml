@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: traefik
+  name: traefik-config-map
+data:
+  config.yaml: |
+    entryPoints:
+      web:
+        address: ':80'
+
+    log:
+      level: DEBUG
+
+    api:
+      insecure: true
+
+    providers:
+      kubernetesCRD:
+        allowCrossNamespace: true
+        allowExternalNameServices: true

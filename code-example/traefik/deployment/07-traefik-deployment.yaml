@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: traefik
+  name: traefik-deployment
+  labels:
+    app: traefik
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: traefik
+  template:
+    metadata:
+      labels:
+        app: traefik
+    spec:
+      serviceAccountName: traefik-account
+      containers:
+        - name: traefik
+          image: traefik:v2.10
+          args:
+            - "--configfile=/etc/traefik/config.yaml"
+          ports:
+            - name: web
+              containerPort: 80
+            - name: dashboard
+              containerPort: 8080
+            - name: metrics
+              containerPort: 8082
+          volumeMounts:
+            - name: traefik-config-map-volume
+              mountPath: /etc/traefik/
+      volumes:
+        - name: traefik-config-map-volume
+          configMap:
+            defaultMode: 420
+            name: traefik-config-map
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: traefik
+  name: traefik-web-service
+
+spec:
+  type: LoadBalancer
+  ports:
+    - targetPort: web
+      port: 8081
+  selector:
+    app: traefik
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: traefik
+  name: traefik-dashboard-service
+
+spec:
+  type: LoadBalancer
+  ports:
+    - targetPort: dashboard
+      port: 8080
+  selector:
+    app: traefik
