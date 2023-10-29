@@ -8,12 +8,30 @@ data:
     entryPoints:
       web:
         address: ':80'
+      metrics:
+        address: ':8082'
 
     log:
       level: DEBUG
 
     api:
       insecure: true
+
+    metrics:
+      prometheus:
+        entryPoint: metrics
+        addEntryPointsLabels: true
+        addRoutersLabels: true
+        addServicesLabels: true
+        buckets:
+          - 0.1
+          - 0.25
+          - 0.5
+          - 1
+          - 2
+          - 3
+          - 5
+          - 10
 
     providers:
       kubernetesCRD:
