@@ -51,3 +51,40 @@ spec:
       protocol: TCP
       port: 8889
       targetPort: 8889
+
+---
+
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: simple-service-route
+  namespace: simple-service
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: PathPrefix(`/simple-service`)
+      middlewares:
+        - name: simple-service-strip-prefix
+          namespace: simple-service
+      services:
+        - kind: Service
+          name: simple-service
+          namespace: simple-service
+          passHostHeader: true
+          port: 8888
+          strategy: RoundRobin
+          nativeLB: true
+
+---
+
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: simple-service-strip-prefix
+  namespace: simple-service
+spec:
+  stripPrefix:
+    prefixes:
+      - /simple-service

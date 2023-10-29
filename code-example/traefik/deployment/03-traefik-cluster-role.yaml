@@ -19,9 +19,20 @@ rules:
   - apiGroups:
       - extensions
       - networking.k8s.io
+      - traefik.io
+      - traefik.containo.us
     resources:
       - ingresses
       - ingressclasses
+      - traefikservices
+      - ingressroutes
+      - ingressroutetcps
+      - ingressrouteudps
+      - middlewares
+      - middlewaretcps
+      - tlsstores
+      - tlsoptions
+      - serverstransports
     verbs:
       - get
       - list
