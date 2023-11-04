@@ -4,8 +4,9 @@ metadata:
   namespace: prometheus
   name: prometheus-storage-pvc
 spec:
+  storageClassName: localstorage
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 5Gi
