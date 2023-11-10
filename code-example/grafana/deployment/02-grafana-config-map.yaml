@@ -7,7 +7,7 @@ data:
   grafana.ini: |
     [database]
     # You can configure the database connection by specifying type, host, name, user and password
-    # as seperate properties or as on string using the url propertie.
+    # as separate properties or as on string using the url properties.
 
     # Either "mysql", "postgres" or "sqlite3", it's your choice
     type = postgres
@@ -19,3 +19,9 @@ data:
 
     # For "postgres" only, either "disable", "require" or "verify-full"
     ssl_mode = disable
+    
+    [auth.anonymous]
+    # enable anonymous access
+    enabled = true
+    org_name = Main Org.
+    org_role = Admin
