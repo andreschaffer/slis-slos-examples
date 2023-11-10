@@ -9,5 +9,5 @@ curl localhost:3000
 
 ## Setup
 - Login with admin:admin
-- Add Prometheus Data Source
+- Add Prometheus Data Source with URL http://prometheus-service.prometheus.svc.cluster.local:9090
 - Import Dashboard [SLOs Ping](dashboard/slos-ping.json)
