@@ -46,7 +46,6 @@ metadata:
   name: traefik-web-service
 
 spec:
-  type: LoadBalancer
   selector:
     app: traefik
   ports:
@@ -61,7 +60,6 @@ metadata:
   name: traefik-dashboard-service
 
 spec:
-  type: LoadBalancer
   selector:
     app: traefik
   ports:
@@ -78,7 +76,6 @@ metadata:
     prometheus: 'true'
 
 spec:
-  type: LoadBalancer
   selector:
     app: traefik
   ports:
