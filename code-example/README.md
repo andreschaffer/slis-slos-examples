@@ -1,5 +1,42 @@
 # code-example
 
+## Overview
+
+             │                             │
+          1  │                          2  │
+             │                             │
+             ▼                             ▼
+      ┌──────────────┐              ┌───────────┐
+      │              │              │           │
+      │  k6 traffic  │              │  Grafana  │
+      │              │              │           │
+      └──────┬───────┘              └──────┬────┘
+             │                             │
+             │                             │
+             ▼                             ▼
+      ┌─────────────┐               ┌────────────┐
+      │             │               │            │
+      │   Traefik   │◄──────────────┤ Prometheus │
+      │             │               │            │
+      └──────┬──────┘               └──────┬─────┘
+             │                             │
+             │                             │
+             ▼                             │
+    ┌──────────────────┐                   │
+    │                  │                   │
+    │  simple-service  │◄──────────────────┘
+    │                  │
+    └──────────────────┘
+
+The resources involved in this code example are:
+- k6: used to generate traffic towards our application
+- Traefik: used as load balancer for our application
+- simple-service: a pretty simple application with a ping endpoint
+- Prometheus: for recording our load balancer and application metrics
+- Grafana: for visualising our application metrics
+
+There are two types of setup below, just pick the one you feel most comfortable with.
+
 ## Step-by-step setup
 - Deploy [prometheus](prometheus/README.md)
 - Deploy [traefik](traefik/README.md)
