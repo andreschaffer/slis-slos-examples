@@ -7,7 +7,8 @@ spec:
   capacity:
     storage: 5Gi
   accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: localstorage
   hostPath:
-    path: /data/kubernetes/prometheus/storage
+    path: /tmp
