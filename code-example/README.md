@@ -35,6 +35,9 @@ The resources involved in this code example are:
 - Prometheus: for recording our load balancer and application metrics
 - Grafana: for visualising our application metrics
 
+The metrics used for our SLIs and SLOs are the ones recorded from Traefik. Nevertheless, 
+additional metrics recorded directly from the application are usually useful for troubleshooting.
+
 There are two types of setup below, just pick the one you feel most comfortable with.
 
 ## Step-by-step setup
