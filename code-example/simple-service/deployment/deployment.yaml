@@ -58,7 +58,7 @@ spec:
     - web
   routes:
     - kind: Rule
-      match: PathPrefix(`/simple-service`)
+      match: PathPrefix(`/simple-service/ping`)
       middlewares:
         - name: simple-service-strip-prefix
           namespace: simple-service
