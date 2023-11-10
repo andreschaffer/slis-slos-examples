@@ -370,7 +370,7 @@
             "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "app_action:sli_availability:rate28d{app=\"$app\",action=\"$action\"}",
+          "expr": "sli_availability:rate28d{router=\"$router\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "sli",
@@ -532,7 +532,7 @@
             "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "app_action:slo_availability95_error_budget:rate28d{app=\"$app\",action=\"$action\"}",
+          "expr": "slo_availability95_error_budget:rate28d{router=\"$router\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "remaining",
@@ -677,7 +677,7 @@
             "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "app_action:sli_latency100ms:rate28d{app=\"$app\",action=\"$action\"}",
+          "expr": "sli_latency100ms:rate28d{router=\"$router\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "sli",
@@ -839,7 +839,7 @@
             "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "app_action:slo_latency100ms95_error_budget:rate28d{app=\"$app\",action=\"$action\"}",
+          "expr": "slo_latency100ms95_error_budget:rate28d{router=\"$router\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "remaining",
@@ -908,8 +908,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -984,7 +983,7 @@
             "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(rate(task:http_response_total_count{app=\"$app\",action=\"$action\"}[1m])) by (job,app,action)",
+          "expr": "sum(rate(task:http_response_total_count{router=\"$router\"}[1m])) by (router)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "total requests rate",
@@ -1016,19 +1015,30 @@
   "templating": {
     "list": [
       {
-        "description": "",
-        "hide": 2,
-        "name": "app",
-        "query": "simple-service",
+        "current": {
+          "selected": false,
+          "text": "",
+          "value": ""
+        },
+        "datasource": {
+          "type": "prometheus"
+        },
+        "definition": "label_values(traefik_router_request_duration_seconds_count{router=~\"^simple-service.*\"}, router)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "",
+        "multi": true,
+        "name": "router",
+        "options": [],
+        "query": {
+          "query": "label_values(traefik_router_request_duration_seconds_count{router=~\"^simple-service.*\"}, router)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
         "skipUrlSync": false,
-        "type": "constant"
-      },
-      {
-        "hide": 2,
-        "name": "action",
-        "query": "ping",
-        "skipUrlSync": false,
-        "type": "constant"
+        "sort": 0,
+        "type": "query"
       }
     ]
   },
@@ -1060,6 +1070,6 @@
   "timezone": "",
   "title": "SLOs - Ping [28d]",
   "uid": "389KVPx4z",
-  "version": 1,
+  "version": 4,
   "weekStart": ""
 }
