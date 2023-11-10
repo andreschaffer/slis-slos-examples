@@ -1,4 +1,4 @@
-.PHONY: ensure-local-context deploy-prometheus deploy-grafana deploy-traefik deploy-simple-service all clean tunnel
+.PHONY: ensure-local-context deploy-prometheus deploy-grafana deploy-traefik deploy-simple-service all clean
 
 ensure-local-context:
 	kubectl config use-context docker-desktop
@@ -30,11 +30,3 @@ clean:
 	kubectl delete -f traefik/deployment/
 	kubectl delete -f grafana/deployment/
 	kubectl delete -f prometheus/deployment/
-
-tunnel:
-	kubectl port-forward service/prometheus-service 9090 -n prometheus & \
-	kubectl port-forward service/grafana-service 3000 -n grafana & \
-	kubectl port-forward service/traefik-dashboard-service 8080 -n traefik & \
-	kubectl port-forward service/traefik-metrics-service 8082 -n traefik & \
-	kubectl port-forward service/traefik-web-service 8081 -n traefik & \
-	kubectl port-forward service/simple-service 8888 8889 -n simple-service &
