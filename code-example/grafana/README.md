@@ -11,3 +11,4 @@ curl localhost:3000
 - Anonymous access is enabled in this code example, so no login is necessary
 - Add Prometheus Data Source with URL http://prometheus-service.prometheus.svc.cluster.local:9090
 - Import Dashboard [SLOs Ping](dashboard/slos-ping.json)
+- Read more about the [dashboard](dashboard/README.md)
