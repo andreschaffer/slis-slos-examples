@@ -33,12 +33,16 @@ The resources involved in this code example are:
 - Traefik: used as load balancer for our application
 - simple-service: a pretty simple application with a ping endpoint
 - Prometheus: for recording our load balancer and application metrics
-- Grafana: for visualising our application metrics
+- Grafana: for visualising our metrics
 
 The metrics used for our SLIs and SLOs are the ones recorded from Traefik. Nevertheless, 
-additional metrics recorded directly from the application are usually useful for troubleshooting.
+additional metrics recorded directly from the application are usually still useful for observability and troubleshooting.
 
-There are two types of setup below, just pick the one you feel most comfortable with.
+## Prerequisites
+- Docker
+- Kubernetes
+
+There are two types of setup provided below, just pick the one you feel most comfortable with.
 
 ## Step-by-step setup
 - Deploy [prometheus](prometheus/README.md)
