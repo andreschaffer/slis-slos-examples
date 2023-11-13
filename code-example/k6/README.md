@@ -3,7 +3,7 @@
 ## Simulating traffic to simple-service with k6
 ```
 docker run --rm --add-host=host.docker.internal:host-gateway -i grafana/k6 \
-    run --vus 10 --duration 10s - <traffic.js
+    run --vus 100 --duration 10s - <traffic.js
 ```
 
 Control Parameters:
