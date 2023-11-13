@@ -121,7 +121,7 @@
             "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "max(ALERTS{alertstate=\"firing\",severity=\"ticket\",app=\"$app\",action=\"$action\"} or on() vector(0))",
+          "expr": "max(ALERTS{alertstate=\"firing\",severity=\"ticket\",router=\"$router\"} or on() vector(0))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "__auto",
@@ -224,7 +224,7 @@
             "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "max(ALERTS{alertstate=\"firing\",severity=\"page\",app=\"$app\",action=\"$action\"} or on() vector(0))",
+          "expr": "max(ALERTS{alertstate=\"firing\",severity=\"page\",router=\"$router\"} or on() vector(0))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "__auto",
@@ -995,7 +995,7 @@
             "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(rate(task:http_response_error_count{app=\"$app\",action=\"$action\"}[1m])) by (job,app,action)",
+          "expr": "sum(rate(task:http_response_error_count{router=\"$router\"}[1m])) by (router)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "error responses rate",
