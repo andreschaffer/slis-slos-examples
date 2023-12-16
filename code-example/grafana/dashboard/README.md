@@ -1,5 +1,9 @@
 # Dashboard
 
+## Layout
+
+![alt text](screenshot.png "Dashboard Screenshot")
+
 The layout of the dashboard provides the following info around the application's "ping" functionality SLOs:
 - Ticket and Page Alerts (based on the rate the application burns down on its SLOs)
 - Availability and Latency SLIs and SLOs
