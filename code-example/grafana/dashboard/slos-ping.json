@@ -1023,7 +1023,7 @@
         "datasource": {
           "type": "prometheus"
         },
-        "definition": "label_values(traefik_router_request_duration_seconds_count{router=~\"^simple-service.*\"}, router)",
+        "definition": "label_values(traefik_router_request_duration_seconds_count{router=~\"^simple-service-simple-service-route-ping.*\"}, router)",
         "hide": 0,
         "includeAll": false,
         "label": "",
@@ -1031,7 +1031,7 @@
         "name": "router",
         "options": [],
         "query": {
-          "query": "label_values(traefik_router_request_duration_seconds_count{router=~\"^simple-service.*\"}, router)",
+          "query": "label_values(traefik_router_request_duration_seconds_count{router=~\"^simple-service-simple-service-route-ping.*\"}, router)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
