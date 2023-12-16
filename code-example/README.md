@@ -1,5 +1,7 @@
 # code-example
 
+A code example of a simple application providing a "ping" functionality to its users.
+
 ## Overview
 
              │                             │
@@ -8,7 +10,7 @@
              ▼                             ▼
       ┌──────────────┐              ┌───────────┐
       │              │              │           │
-      │  k6 traffic  │              │  Grafana  │
+      │      k6      │              │  Grafana  │
       │              │              │           │
       └──────┬───────┘              └──────┬────┘
              │                             │
@@ -31,7 +33,7 @@
 The resources involved in this code example are:
 - k6: used to generate traffic towards our application
 - Traefik: used as load balancer for our application
-- simple-service: a pretty simple application with a ping endpoint
+- simple-service: a simple application providing a "ping" functionality
 - Prometheus: for recording our load balancer and application metrics
 - Grafana: for visualising our metrics
 
