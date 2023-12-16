@@ -51,7 +51,7 @@ spec:
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: simple-service-route
+  name: simple-service-route-ping
   namespace: simple-service
 spec:
   entryPoints:
