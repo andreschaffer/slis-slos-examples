@@ -44,20 +44,33 @@ More definitions worth standardizing on per type of measurement and make your li
 Targets, right?  
 The aim with SLOs will be to find the reliability line that divides having happy users and having unhappy users. That is what we call our _good enough_ reliability. It’s easy to agree that setting a too low reliability target will lead to unhappy users. What may not be so obvious is that setting a too high reliability target will lead to, most often, unnecessary effort from your team to maintain it over the course of time. Even if your reliability numbers are super high today, don't lock your SLOs based on that. Many times your users may still be happy with a target less demanding on you. Try to really find your _good enough_ reliability and invest the rest of your time in other types of value to your users.
 
-TODO continue
+An example of targets on the _Request / Response_ category would be:
+- Availability: 99% of the requests in question will succeed.
+- Latency: 90% of the requests in question will complete in less than 10ms, and 99% will complete in less than 100ms.
 
-## Monitoring & Alerting
+### Standardization
+It's worth standardizing on a few points, so the practice can scale well in your organization:
+- Compliance period: the time window your SLOs are evaluated over for operational needs, e.g. 28 rolling days.
+- Compliance report: a dashboard with in-time snapshots of your SLOs compliance, for transparent communication with others and for spotting problematic areas.
+- Look-back and prioritization: the frequency in which to review your performance against the SLOs, the effort in maintaining them, and your user satisfaction, e.g. fixed calendar quarters.
+- Requirements' categories: use buckets of approximately similar availability requirements, e.g.:
+  - HIGH_FAST: high availability and low latency requirements, e.g. 99% availability and latency p99 of 100ms.
+  - HIGH_SLOW: important but less latency-sensitive requirements, e.g. 99% availability and latency p99 of 5s.
+  - LOW: outages are mostly invisible to users, e.g. 90% availability, and no latency requirement.
+
+### Error Budget, Alerting and Ways of Working
 TODO
 
+# Studies on Business Impact
+TODO
 
-# Running Code Example
+# Code Example
 TODO
 
 # Contributing
 If you would like to help making this project better, see the [CONTRIBUTING.md](CONTRIBUTING.md).  
 
 # Maintainers
-
 Send any other comments, flowers and suggestions to [André Schaffer](https://github.com/andreschaffer) and [Jefferson Girão](https://github.com/jeffersongirao).
 
 # License
