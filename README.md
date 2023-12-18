@@ -9,7 +9,7 @@ In this project I will share a practical example of working with these concepts.
 # Terminology
 SLIs stand for Service Level Indicators. They are simply the indicators or _measurements_ of your service that speak for its reliability. They will help you with the first question “How reliable is the service you provide to your users?”.
 
-SLOs stand for Service Level Objectives. They are simply your SLIs + objectives or _targets_ for your service’s reliability. They clearly relate to the second question “What would be a _good enough_ reliability level for your service?”, but also to the third one “What would change in how you work with software development if reliability was a feature?”. Once a reasonable reliability target is defined, running below it should spur action to get back on track, as no one wants to provide an unreliable experience to their users. Or in other words, reliability now becomes an unambiguous feature, and should be fixed if broken.
+SLOs stand for Service Level Objectives. They are simply your SLIs + objectives or _targets_ for your service’s reliability. They clearly relate to the second question “What would be a _good enough_ reliability level for your service?”, but also to the third one “What would change in how you work with software development if reliability was a feature?”. Once a reasonable reliability target is defined, running below it should invoke action to get back on track, as no one wants to provide an unreliable experience to their users. Or in other words, reliability now becomes an unambiguous feature, and should be fixed if broken.
 
 SLAs stand for Service Level Agreements. They are simply your SLOs + agreements or _consequences_ of breaking the SLOs. These are signed between providers and customers, and the consequences are usually monetary. They directly speak to the third question “What would change in how you work with software development if reliability was a feature?”, as no one wants to lose money. I just wanted to briefly touch on the concept of SLAs since it’s common in the reliability and business world, but won’t go further on it in this project.
 
@@ -17,7 +17,7 @@ SLAs stand for Service Level Agreements. They are simply your SLOs + agreements 
 Now with the terms covered, it’s time to look at defining SLIs and SLOs for our services.
 
 ## Where to start in your organization?
-My first advice is to start pragmatically and from your external users' perspective. Look at the "edge" of your service, where your external users interact directly with, and define your SLIs and SLOs there. As your service's system grows in complexity and dependencies, add SLIs and SLOs to the dependencies too. It will be tricky to maintain SLIs and SLOs at the "edge" and to understand where things went wrong if the dependencies do not take their part in it too.
+My first advice is to start pragmatically and from your external users' perspective (think user journeys). Look at the "edge" of your service, where your external users interact directly with, and define your SLIs and SLOs there. As your service's system grows in complexity and dependencies, add SLIs and SLOs to the dependencies too. It will be tricky to maintain SLIs and SLOs at the "edge" and to understand where things went wrong if the dependencies do not take their part in it too.
 
 My second advice, as with anything else, is to remain intentional. Do not care too much about measuring, but measure what you care about. It's easy to fall for measuring a lot of things just because one can. Understand what really matters to your users, and focus on those.
 
@@ -25,7 +25,7 @@ My second advice, as with anything else, is to remain intentional. Do not care t
 Measurements, right?  
 The types of measurements that speak for the reliability of your service may vary depending on its nature. In most cases though, they will fall into one of the categories from Google's SLI Menu:
 
-![alt text](https://github.com/andreschaffer/slis-slos-examples/blob/main/sli_menu.jpg "SLI Menu image")
+![alt text](sli_menu.jpg "SLI Menu image")
 
 I won’t cover all the different SLIs from the Menu, as one can find more detailed information about [them](https://sre.google/workbook/implementing-slos/#slis-for-different-types-of-services) in Google’s SRE book. I will instead focus on the _Request / Response_ category and maintain a red thread in this project.
 
@@ -49,14 +49,15 @@ An example of targets on the _Request / Response_ category would be:
 - Latency: 90% of the requests in question will complete in less than 10ms, and 99% will complete in less than 100ms.
 
 ### Standardization
-It's worth standardizing on a few points, so the practice can scale well in your organization:
+For the practice to scale well in your organization, it's worth standardizing on a few points:
+- Documentation: make it easy to define and find your SLOs, e.g. use a [template](https://docs.google.com/document/d/1SNgnAjRT1jrMa7vGHK0J_0jJEDvKJ5JmTEXFvNRDaHE/edit) and make them easily accessible in a common place.
 - Compliance period: the time window your SLOs are evaluated over for operational needs, e.g. 28 rolling days.
-- Compliance report: a dashboard with in-time snapshots of your SLOs compliance, for transparent communication with others and for spotting problematic areas.
-- Look-back and prioritization: the frequency in which to review your performance against the SLOs, the effort in maintaining them, and your user satisfaction, e.g. fixed calendar quarters.
-- Requirements' categories: use buckets of approximately similar availability requirements, e.g.:
+- Requirements' categories: use buckets for approximately similar availability requirements, e.g.:
   - HIGH_FAST: high availability and low latency requirements, e.g. 99% availability and latency p99 of 100ms.
   - HIGH_SLOW: important but less latency-sensitive requirements, e.g. 99% availability and latency p99 of 5s.
   - LOW: outages are mostly invisible to users, e.g. 90% availability, and no latency requirement.
+- Compliance report: a dashboard with in-time snapshots of your SLOs compliance, for transparent communication with others and for spotting problematic areas.
+- Look-back and prioritization: the frequency in which to review your performance against the SLOs, the effort in maintaining them, and your user satisfaction, e.g. fixed calendar quarters.
 
 ### Error Budget, Alerting and Ways of Working
 TODO
