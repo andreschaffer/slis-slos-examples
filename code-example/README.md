@@ -71,3 +71,5 @@ There are two types of setup provided below, just pick the one you feel most com
 - Setup [Grafana Dashboard](grafana/README.md#Setup)
 - Observe the simple-service SLOs in Grafana
 - Clean resources with `make clean` when satisfied
+
+## Have fun!
