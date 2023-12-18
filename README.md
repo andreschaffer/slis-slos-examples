@@ -76,12 +76,13 @@ We repeated it is important to understand and provide a good enough service reli
 - Amazon: every 100ms increase in load time of Amazon.com decreased sales by 1% (Kohavi and Longbotham 2007).
 
 # Good Discussions
+So how do we get to good SLOs? 
 
-TODO good discussions, perspectives
-TODO experiment
+Well, start by bringing together product, design, development and SRE for some good discussions! Create a common understanding of your users' experience on what they care the most about.  
+Bring data that you have, and use common facilitation techniques to get started, like simple dot-voting for identifying the first user journeys to cover, and visualization techniques for requirements categorization. Keep it simple, reflect and iterate as you go!
 
 # Code Example
-TODO
+We've put together a [code example](code-example) of how one can go about implementing SLOs, and hope you can get some inspiration from it!
 
 # Contributing
 If you would like to help making this project better, see the [CONTRIBUTING.md](CONTRIBUTING.md).  

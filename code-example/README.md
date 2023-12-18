@@ -1,11 +1,20 @@
 # code-example
 
-A code example of a simple application providing a "ping" functionality to its users.
+This is a code example of implementing SLIs and SLOs on a simple application.
 
-## Overview
+## SLIs and SLOs definition
+Imagine that after good discussions with the different functions in your team, you agree that the "ping" functionality your service provides is the one that is important to your users, and come up with these SLIs and SLOs:
+- Availability: 95% of the "ping" requests succeed.
+- Latency: 95% of the "ping" requests complete in at most 100ms.
+
+You also define that the compliance period will be 28 rolling days, and that the measurements will be taken from the load balancer.
+
+## System Overview
+
+How the system looks and which tools are involved in this example are described below:
 
              │                             │
-          1  │                          2  │
+             │                             │
              │                             │
              ▼                             ▼
       ┌──────────────┐              ┌───────────┐
@@ -30,17 +39,16 @@ A code example of a simple application providing a "ping" functionality to its u
     │                  │
     └──────────────────┘
 
-The resources involved in this code example are:
-- k6: used to generate traffic towards our application
+- k6: tool used to generate traffic towards our application
 - Traefik: used as load balancer for our application
-- simple-service: a simple application providing a "ping" functionality
-- Prometheus: for recording our load balancer and application metrics
-- Grafana: for visualising our metrics
+- simple-service: our application providing the "ping" functionality
+- Prometheus: used for recording our load balancer and application metrics
+- Grafana: used for visualising our metrics, and how we are doing with our SLOs
 
-The metrics used for our SLIs and SLOs are the ones recorded from Traefik. Nevertheless, 
+The metrics used for our SLIs and SLOs are the ones recorded from Traefik. Out-of-scope, but good to mention, 
 additional metrics recorded directly from the application are usually still useful for observability and troubleshooting.
 
-## Prerequisites
+## Prerequisites for getting it up and running
 - Docker
 - Kubernetes
 
