@@ -60,7 +60,17 @@ For the practice to scale well in your organization, it's worth standardizing on
 - Look-back and prioritization: the frequency in which to review your performance against the SLOs, the effort in maintaining them, and your user satisfaction, e.g. fixed calendar quarters.
 
 ### Error Budget, Alerting and Ways of Working
-TODO
+Once an SLO is defined, we then get what is called our Error Budget. It is simply the tolerance for our service in a non-compliant state before violating the SLO. For example, with an availability SLO defined that 99% of the requests should succeed, we then get an Error Budget that represents the 1% of the requests that are allowed to fail. In this case, if 0% of the requests have failed, we still have 100% of the Error Budget left; or if 1% of the requests have failed, we have 0% of the Error Budget left.
+
+This brings some interesting operational aspects to the table. It doesn't matter now if 2 SLOs have different targets, we can always operate based on their Error Budgets that start with 100%.
+
+Remember we mentioned that we would like reliability to be seen as a feature? Here is where that comes to life, by defining clear policies on how teams should act when they exhaust their Error Budgets. It's important to come to an agreement with your stakeholders a priori, and some common practices are:
+- The team focuses exclusively on reliability issues until the system is within SLO, pushing back on external feature requests.
+- A production freeze halts certain changes to the system until there is sufficient error budget to resume changes.
+
+As one can see, the impact of exhausting Error Budgets can be quite high, and ideally we would like to not reach that point. To help with that, we can adopt a more predictive alerting practice, and alert based on the rate that the Error Budget is being consumed. For example, if we would be measuring our SLOs compliance over 10 days, and in a single day we happened to consume more than 10% of our Error Budget, we know what will happen if that is sustained.  
+
+TODO alerting
 
 # Studies on Business Impact
 TODO
