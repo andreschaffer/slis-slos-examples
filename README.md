@@ -50,7 +50,7 @@ An example of targets on the _Request / Response_ category would be:
 
 ### Standardization
 For the practice to scale well in your organization, it's worth standardizing on a few points:
-- Documentation: make it easy to define and find your SLOs, e.g. use a [template](https://docs.google.com/document/d/1SNgnAjRT1jrMa7vGHK0J_0jJEDvKJ5JmTEXFvNRDaHE/edit) and make them easily accessible in a common place.
+- Documentation: make it easy to define and find your SLOs, e.g. use a [template](https://docs.google.com/document/d/1SNgnAjRT1jrMa7vGHK0J_0jJEDvKJ5JmTEXFvNRDaHE/edit) and make them accessible in a common place.
 - Compliance period: the time window your SLOs are evaluated over for operational needs, e.g. 28 rolling days.
 - Requirements' categories: use buckets for approximately similar availability requirements, e.g.:
   - HIGH_FAST: high availability and low latency requirements, e.g. 99% availability and latency p99 of 100ms.
