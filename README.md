@@ -46,7 +46,7 @@ The aim with SLOs will be to find the reliability line that divides having happy
 
 An example of targets on the _Request / Response_ category would be:
 - Availability: 99% of the requests in question will succeed.
-- Latency: 90% of the requests in question will complete in less than 10ms, and 99% will complete in less than 100ms.
+- Latency: 90% of the requests in question will complete in less than 10ms, and 99% in less than 100ms.
 
 ### Standardization
 For the practice to scale well in your organization, it's worth standardizing on a few points:
