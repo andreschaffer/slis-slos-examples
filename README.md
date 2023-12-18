@@ -2,9 +2,9 @@
 
 # Motivation
 How reliable is the service you provide to your users? What would be a _good enough_ reliability level for your service? And what would change in how you work with software development if reliability was a feature?  
-There is a lot of material out there about SLIs and SLOs, but to me these three simple questions reveal the essence of it.  
+There is a lot of material out there about SLIs and SLOs, but to us these three simple questions reveal the essence of it.  
 
-In this project I will share a practical example of working with these concepts. I will try and keep it short and to the point, and recommend reading [Google's SRE book](https://sre.google/sre-book/service-level-objectives) if one wants to learn the subject more in depth.
+In this project we will share a practical example of working with these concepts. We will try and keep it short and to the point, and recommend reading [Google's SRE book](https://sre.google/sre-book/service-level-objectives) if one wants to learn the subject more in depth.
 
 # Terminology
 SLIs stand for Service Level Indicators. They are simply the indicators or _measurements_ of your service that speak for its reliability. They will help you with the first question “How reliable is the service you provide to your users?”.
@@ -27,7 +27,7 @@ The types of measurements that speak for the reliability of your service may var
 
 ![alt text](sli_menu.jpg "SLI Menu image")
 
-I won’t cover all the different SLIs from the Menu, as one can find more detailed information about [them](https://sre.google/workbook/implementing-slos/#slis-for-different-types-of-services) in Google’s SRE book. I will instead focus on the _Request / Response_ category and maintain a red thread in this project.
+We won’t cover all the different SLIs from the Menu, as one can find more detailed information about [them](https://sre.google/workbook/implementing-slos/#slis-for-different-types-of-services) in Google’s SRE book. We will instead focus on the _Request / Response_ category and maintain a red thread in this project.
 
 - Availability: may be seen as the proportion of successful responses.
 - Latency: may be seen as the proportion of responses faster than a threshold.
@@ -68,12 +68,17 @@ Remember we mentioned that we would like reliability to be seen as a feature? He
 - The team focuses exclusively on reliability issues until the system is within SLO, pushing back on external feature requests.
 - A production freeze halts certain changes to the system until there is sufficient error budget to resume changes.
 
-As one can see, the impact of exhausting Error Budgets can be quite high, and ideally we would like to not reach that point. To help with that, we can adopt a more predictive alerting practice, and alert based on the rate that the Error Budget is being consumed. For example, if we would be measuring our SLOs compliance over 10 days, and in a single day we happened to consume more than 10% of our Error Budget, we know what will happen if that is sustained.  
-
-TODO alerting
+As one can see, the impact of exhausting Error Budgets can be quite high, and ideally we would like to not reach that point. To help with that, we can adopt a more predictive alerting practice, and alert based on the rate that the Error Budget is being consumed. For example, if we would be measuring our SLOs compliance over 10 days, and in a single day we happened to consume more than 10% of our Error Budget, we know what will happen if that is sustained... and should do something about it. [Google's SRE chapter: Alerting on SLOs](https://sre.google/workbook/alerting-on-slos/) does a great job covering this.
 
 # Studies on Business Impact
-TODO
+We repeated it is important to understand and provide a good enough service reliability level to your users. If one needs more convincing, to showcase the impact that it can have on your business, one can look at several studies that were published on the matter, from companies like Google, Amazon, Microsoft, Yahoo, Akamai, etc. These are just a couple that we found interesting:
+- Google: a change from loading a 10-result page in 0.4 seconds to a 30-result page loading in 0.9 seconds decreased traffic and ad revenues by 20% (Linden 2006).
+- Amazon: every 100ms increase in load time of Amazon.com decreased sales by 1% (Kohavi and Longbotham 2007).
+
+# Good Discussions
+
+TODO good discussions, perspectives
+TODO experiment
 
 # Code Example
 TODO
