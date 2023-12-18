@@ -31,7 +31,7 @@ We won’t cover all the different SLIs from the Menu, as one can find more deta
 
 - Availability: may be seen as the proportion of successful responses.
 - Latency: may be seen as the proportion of responses faster than a threshold.
-- Quality: may be seen as the proportion of responses in an undegraded state. These only make sense if your service has fallbacks and can still provide responses in the event something is unavailable at the time of request, although in a gracefully degraded state.
+- Quality: may be seen as the proportion of responses in an undegraded state. These only make sense if your service has fallbacks and can still provide responses, although in a gracefully degraded state, in the event something is unavailable at the time of request.
 
 ### Standardization
 As one can notice, all the SLIs described above have a proportion form to it. SLIs follow the equation of _good events_ / _valid events_. That makes it easy to work with and later set targets on, whatever measurement you need, as long as you can separate good events from the others.
