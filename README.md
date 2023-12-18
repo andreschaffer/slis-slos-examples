@@ -82,7 +82,7 @@ Well, start by bringing together product, design, development and SRE for some g
 Bring data that you have, and use common facilitation techniques to get started, like simple dot-voting for identifying the first user journeys to cover, and visualization techniques for requirements categorization. Keep it simple, reflect and iterate as you go!
 
 # Code Example
-We've put together a [code example](code-example) of how one can go about implementing SLOs, and hope you can get some inspiration from it!
+We've put together a [code example](code-example) of how one can go about implementing SLOs, building on the content shared above, and hope you can get some inspiration from it!
 
 # Contributing
 If you would like to help making this project better, see the [CONTRIBUTING.md](CONTRIBUTING.md).  
